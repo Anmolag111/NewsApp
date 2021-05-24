@@ -19,13 +19,8 @@ export const SearchBox = ({
   handleChange,
   handleSubmit,
   handleRouteClick,
+  values,
 }) => (
-  // <input
-  //   classNameName="search"
-  //   type="search"
-  //   placeholder={placeholder}
-  //   onChange={handleChange}
-  // />
   <nav className="navbar navbar-dark bg-dark navbar-expand-lg fixed-top">
     <div className="container-fluid">
       <button
@@ -42,7 +37,7 @@ export const SearchBox = ({
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           <li className="nav-item ml-3 h1 mt-2">
-            <a className="nav-link active" aria-current="page" href="#">
+            <a className="nav-link active" aria-current="page" href="">
               NEWS APP
             </a>
           </li>
@@ -50,7 +45,7 @@ export const SearchBox = ({
             <a
               className="nav-link active"
               aria-current="page"
-              href="#"
+              href=""
               name="covid-19 India news"
               onClick={handleRouteClick}
             >
@@ -61,7 +56,7 @@ export const SearchBox = ({
             <a
               className="nav-link active"
               aria-current="page"
-              href="#"
+              href=""
               name="Business India news"
               onClick={handleRouteClick}
             >
@@ -72,7 +67,7 @@ export const SearchBox = ({
             <a
               className="nav-link active"
               aria-current="page"
-              href="#"
+              href=""
               name="Trending India news"
               onClick={handleRouteClick}
             >
@@ -83,7 +78,7 @@ export const SearchBox = ({
             <a
               className="nav-link active"
               aria-current="page"
-              href="#"
+              href=""
               name="Technology India news"
               onClick={handleRouteClick}
             >
@@ -94,7 +89,7 @@ export const SearchBox = ({
             <a
               className="nav-link active"
               aria-current="page"
-              href="#"
+              href=""
               name="Sports India news"
               onClick={handleRouteClick}
             >
@@ -111,6 +106,7 @@ export const SearchBox = ({
             onChange={handleChange}
             min="2020-04-11"
             max={today}
+            value={values.date}
           />
         </div>
 
@@ -121,6 +117,7 @@ export const SearchBox = ({
             className="form-control form-control-lg"
             placeholder="Search"
             onChange={handleChange}
+            value={values.searchField}
           />
         </div>
         <button className="btn btn-success btn-lg" onClick={handleSubmit}>

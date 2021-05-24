@@ -28,28 +28,19 @@ class App extends Component {
   }
   fetchData = () => {
     console.log("search field is", this.state.searchField);
-    let text = this.state.searchField;
+    let text = this.state.searchField ? this.state.searchField : "India";
     console.log("count is :", this.state.count);
-    let date = this.state.date == "" ? Date.now() : this.state.date;
-    // console.log(
-    //   "state is ",
-    //   this.state.next,
-    //   " " + date + " " + this.state.searchField + " " + text + this.state.date
-    // );
+    let date = this.state.date === "" ? Date.now() : this.state.date;
+    date = new Date(date).toISOString();
+    console.log("defdate", date);
+    date = new Date(moment.utc(date).format("YYYY-MM-DD")).valueOf();
 
-    //https://github.com/Ankit7982993072/firstapp/blob/master/src/loader.js
-    var defdate = new Date(date).toISOString();
-    console.log("defdate", defdate);
-    var defd = new Date(moment.utc(defdate).format("YYYY-MM-DD")).valueOf();
-    console.log("defd", defd);
-    console.log("moment(defd).valueOf()", moment(defd).valueOf());
-    //
-    let url = `https://webhose.io/nseFilter?token=2ff49d93-4587-4c4d-aca4-57459b878314&size=10&from=${this.state.count}&q=${text} article.published:>${defd}`;
+    let url = `https://webhose.io/nseFilter?q=${text} AND article.published:<${date}&format=json&ts=1608274800000&token=2ff49d93-4587-4c4d-aca4-57459b878314&from=${this.state.count}`;
     fetch(url, { cache: "no-store" })
       .then((response) => response.json())
       .then((data) => {
         console.log(data, " ", url);
-        if (data.docs.length == 0) {
+        if (data.docs.length === 0) {
           this.setState({
             error: true,
             showComponent: false,
@@ -70,18 +61,18 @@ class App extends Component {
       .catch((err) => console.log("Error is ", err));
   };
   fetchNextResults = () => {
-    this.setState({ endloading: true, searchFieldDisable: true });
-    let text = this.state.searchField;
-    let date = this.state.date == "" ? Date.now() : this.state.date;
-    var defdate = new Date(date).toISOString();
-    console.log("defdate", defdate);
-    var defd = new Date(moment.utc(defdate).format("YYYY-MM-DD")).valueOf();
-    console.log("defd", defd);
-    console.log("moment(defd).valueOf()", moment(defd).valueOf());
+    this.setState({ endloading: true });
+    let text = this.state.searchField ? this.state.searchField : "India";
+    let date = this.state.date === "" ? Date.now() : this.state.date;
+    date = new Date(date).toISOString();
+    console.log("defdate", date);
+    date = new Date(moment.utc(date).format("YYYY-MM-DD")).valueOf();
+
     const options = {
       next: this.state.next,
     };
-    let url = `https://webhose.io/nseFilter?token=c07c2a75-8e3e-4a14-836e-0f9c533fee48&size=10&from=${this.state.count}&q=${text}`;
+    let url = `https://webhose.io/nseFilter?q=${text} AND article.published:<${date}&format=json&ts=1608274800000&token=2ff49d93-4587-4c4d-aca4-57459b878314&from=${this.state.count}`;
+
     fetch(url, options, { cache: "no-store" })
       .then((response) => response.json())
       .then((data) => {
@@ -111,8 +102,6 @@ class App extends Component {
     this.fetchData();
   }
   handleSubmit = async () => {
-    //let text = this.state.searchField;
-
     await this.setState({
       loading: true,
       count: 0,
@@ -151,6 +140,7 @@ class App extends Component {
     console.log("e.target.name is", e.target.name);
     await this.setState({
       searchField: e.target.name,
+      date: "",
     });
     this.setState({
       data: [],
@@ -179,6 +169,10 @@ class App extends Component {
         {
           <SearchBox
             placeholder="Search news here..."
+            values={{
+              searchField: this.state.searchField,
+              date: this.state.date,
+            }}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             handleRouteClick={this.handleRouteClick}
