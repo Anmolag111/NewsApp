@@ -30,11 +30,13 @@ class App extends Component {
     console.log("search field is", this.state.searchField);
     let text = this.state.searchField ? this.state.searchField : "India";
     console.log("count is :", this.state.count);
-    let date = this.state.date === "" ? Date.now() : this.state.date;
-    date = new Date(date).toISOString();
-    console.log("defdate", date);
-    date = new Date(moment.utc(date).format("YYYY-MM-DD")).valueOf();
-
+    // let date = this.state.date === "" ? Date.now() : this.state.date;
+    // date = new Date(date).toISOString();
+    // console.log("defdate", date);
+    // date = new Date(moment.utc(date).format("YYYY-MM-DD")).valueOf();
+    let date =
+      this.state.date === "" ? Date.now() : Date.parse(this.state.date);
+    console.log("defdate", date, text);
     let url = `https://webhose.io/nseFilter?q=${text} AND article.published:<${date}&format=json&ts=1608274800000&token=2ff49d93-4587-4c4d-aca4-57459b878314&from=${this.state.count}`;
     fetch(url, { cache: "no-store" })
       .then((response) => response.json())
@@ -63,11 +65,12 @@ class App extends Component {
   fetchNextResults = () => {
     this.setState({ endloading: true });
     let text = this.state.searchField ? this.state.searchField : "India";
-    let date = this.state.date === "" ? Date.now() : this.state.date;
-    date = new Date(date).toISOString();
-    console.log("defdate", date);
-    date = new Date(moment.utc(date).format("YYYY-MM-DD")).valueOf();
-
+    // let date = this.state.date === "" ? Date.now() : this.state.date;
+    // date = new Date(date).toISOString();
+    // console.log("defdate", date);
+    // date = new Date(moment.utc(date).format("YYYY-MM-DD")).valueOf();
+    let date =
+      this.state.date === "" ? Date.now() : Date.parse(this.state.date);
     const options = {
       next: this.state.next,
     };

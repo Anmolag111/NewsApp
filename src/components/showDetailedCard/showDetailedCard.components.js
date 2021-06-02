@@ -30,7 +30,7 @@ export class ShowDetailedCard extends Component {
         </button>
         <img
           className="cardDetails-img"
-          alt={this.props.childData.article.title.substr(0, 10)}
+          alt="Image not accessible"
           src={
             this.props.childData.article.media.main_image
               ? this.props.childData.article.media.main_image
@@ -44,7 +44,9 @@ export class ShowDetailedCard extends Component {
 
         <p className="cardDetails-author">
           <b>Author : </b>
-          {this.props.childData.article.author}
+          {this.props.childData.article.author
+            ? this.props.childData.article.author
+            : "Unknown"}
         </p>
         <p className="cardDetails-date">
           <b> Date : </b>

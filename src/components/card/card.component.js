@@ -36,7 +36,7 @@ export class Card extends React.Component {
           <div className="card-content"></div>
           <img
             className="card-img"
-            alt={this.props.element.article.title.substr(0, 10)}
+            alt="Image not accessible"
             src={
               this.props.element.article.media.main_image
                 ? this.props.element.article.media.main_image
