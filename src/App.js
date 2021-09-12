@@ -37,7 +37,7 @@ class App extends Component {
     let date =
       this.state.date === "" ? Date.now() : Date.parse(this.state.date);
     console.log("defdate", date, text);
-    let url = `https://webhose.io/nseFilter?q=${text} AND article.published:<${date}&format=json&ts=1608274800000&token=2ff49d93-4587-4c4d-aca4-57459b878314&from=${this.state.count}`;
+    let url = `https://webhose.io/nseFilter?q=${text} AND article.published:<${date}&format=json&ts=1608274800000&token=79e2c0ab-8c43-457e-96ac-c5848c7479c8&from=${this.state.count}`;
     fetch(url, { cache: "no-store" })
       .then((response) => response.json())
       .then((data) => {
@@ -74,7 +74,7 @@ class App extends Component {
     const options = {
       next: this.state.next,
     };
-    let url = `https://webhose.io/nseFilter?q=${text} AND article.published:<${date}&format=json&ts=1608274800000&token=2ff49d93-4587-4c4d-aca4-57459b878314&from=${this.state.count}`;
+    let url = `https://webhose.io/nseFilter?q=${text} AND article.published:<${date}&format=json&ts=1608274800000&token=79e2c0ab-8c43-457e-96ac-c5848c7479c8&from=${this.state.count}`;
 
     fetch(url, options, { cache: "no-store" })
       .then((response) => response.json())
